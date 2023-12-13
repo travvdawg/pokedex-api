@@ -1,4 +1,5 @@
 const poke_container = document.getElementById('poke-container');
+const logo = document.getElementsByClassName('logo');
 // const gen1 = document.getElementsByClassName('gen1');
 // const gen2 = document.getElementsByClassName('gen2');
 // const pokemon_count = 50;
@@ -146,5 +147,9 @@ for (let i = 0; i < gen9Buttons.length; i++) {
 
 // Automatically fetch the first 50 Pokémon when the page loads
 window.addEventListener('load', fetchInitialPokemons);
+
+document.querySelector('.logo').addEventListener('click', () => {
+	fetchInitialPokemons();
+});
 
 fetchPokemons();
