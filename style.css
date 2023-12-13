@@ -1,0 +1,150 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+	background: linear-gradient(rgb(41, 15, 66), rgb(23, 87, 89));
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+h1 {
+	letter-spacing: 3px;
+}
+
+.poke-container {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: space-between;
+	justify-content: center;
+	margin: 0 auto;
+	max-width: 1200px;
+}
+
+.pokemon {
+	background-color: #eee;
+	margin: 10px;
+	padding: 20px;
+	border-radius: 10px;
+	height: 300px;
+	width: 200px;
+	border: solid 3px black;
+	box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-direction: column;
+	cursor: pointer;
+	transition: transform 0.2s ease-in-out;
+}
+
+.pokemon:hover {
+	cursor: pointer;
+	transition: ease-in 0.2s;
+	transform: scale(1.4);
+}
+
+.pokemon .img-container {
+	background-color: rgba(255, 255, 255, 0.6);
+	border-radius: 50%;
+	text-align: center;
+	margin-top: 20px;
+	height: 120px;
+	width: 120px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.pokemon img {
+	width: 150px;
+	height: 150px;
+}
+
+.pokemon .info {
+	margin-top: 5px;
+}
+
+.pokemon .card-info {
+	width: 175px;
+	height: 50px;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	display: none;
+	transition: ease-in 0.5s;
+	background: none;
+	border: none;
+}
+
+.pokemon:hover .card-info {
+	display: contents;
+	cursor: pointer;
+}
+
+.pokemon .info .number {
+	background-color: rgba(0, 0, 0, 0.1);
+	padding: 5px 10px;
+	border-radius: 10px;
+	font-size: 0.8em;
+}
+
+.pokemon .info .name {
+	margin: 15px 0 7px;
+	letter-spacing: 1px;
+}
+
+.generation-menu {
+	background-color: rgb(146, 146, 146);
+	/* padding: 10px 15px; */
+	cursor: pointer;
+	border: none;
+	border-radius: 15px;
+	margin: 1.5rem;
+}
+
+.generation-menu button {
+	padding: 11.5px;
+	background-color: rgb(0, 136, 255);
+	border: none;
+	border-radius: 15px;
+	width: 150px;
+	font-size: 1.5rem;
+	text-align: center;
+}
+
+.generation-menu a {
+	display: block;
+	text-decoration: none;
+	padding: 10px 15px;
+	color: black;
+	background-color: rgb(0, 136, 255);
+	text-align: center;
+}
+
+.generation-menu .generation {
+	background-color: rgb(146, 146, 146);
+	position: absolute;
+	min-width: 150px;
+	box-shadow: 2px 2px 5px black;
+	display: none;
+}
+
+.generation-menu:hover .generation {
+	display: block;
+	border-radius: 15px;
+}
+
+.generation-menu:hover button {
+	background-color: rgb(98, 182, 255);
+}
+
+.generation-menu a:hover {
+	background-color: rgb(98, 182, 255);
+}
