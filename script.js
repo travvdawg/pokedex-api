@@ -1,8 +1,11 @@
 const poke_container = document.getElementById('poke-container');
-const logo = document.getElementsByClassName('logo');
-// const gen1 = document.getElementsByClassName('gen1');
-// const gen2 = document.getElementsByClassName('gen2');
-// const pokemon_count = 50;
+const logo = document.getElementById('logo');
+const pokedexButton = document.getElementById('pokedex-btn');
+const cardsButton = document.getElementById('cards-btn');
+const generationsButton = document.getElementById('gen-all');
+const hero = document.getElementById('hero');
+const generations = document.getElementById('generation-menu');
+
 const colors = {
 	fire: '#fddfdf',
 	grass: '#defde0',
@@ -20,6 +23,19 @@ const colors = {
 	normal: '#f5f5f5',
 	ghost: 'rgb(74,58,90)',
 };
+
+const loadInitialPokemon = () => {
+	pokedexButton.addEventListener('click', () => {
+		pokedexButton.style.display = 'none';
+		cardsButton.style.display = 'none';
+		generationsButton.style.display = 'block';
+		document.querySelector('.generation-menu').style.display = 'block';
+		fetchPokemons(1, 151);
+		hero.style.height = '0vh';
+	});
+};
+
+loadInitialPokemon();
 
 const main_types = Object.keys(colors);
 
@@ -64,20 +80,15 @@ const createPokemonCard = (pokemon) => {
 	poke_container.appendChild(pokemonEl);
 };
 
-document.getElementById('gen-all').addEventListener('click', function () {
-	fetchInitialPokemons();
-});
-
-const fetchInitialPokemons = () => {
-	poke_container.innerHTML = '';
-	fetchPokemons(1, 151);
-};
-
 const gen1Buttons = document.getElementsByClassName('gen1');
 for (let i = 0; i < gen1Buttons.length; i++) {
 	gen1Buttons[i].addEventListener('click', function () {
 		poke_container.innerHTML = '';
+		generations.style.display = 'none';
 		fetchPokemons(1, 151);
+		setTimeout(() => {
+			generations.style.display = 'block';
+		});
 	});
 }
 
@@ -85,7 +96,11 @@ const gen2Buttons = document.getElementsByClassName('gen2');
 for (let i = 0; i < gen2Buttons.length; i++) {
 	gen2Buttons[i].addEventListener('click', function () {
 		poke_container.innerHTML = '';
+		generations.style.display = 'none';
 		fetchPokemons(152, 251);
+		setTimeout(() => {
+			generations.style.display = 'block';
+		});
 	});
 }
 
@@ -93,7 +108,11 @@ const gen3Buttons = document.getElementsByClassName('gen3');
 for (let i = 0; i < gen3Buttons.length; i++) {
 	gen3Buttons[i].addEventListener('click', function () {
 		poke_container.innerHTML = '';
+		generations.style.display = 'none';
 		fetchPokemons(252, 386);
+		setTimeout(() => {
+			generations.style.display = 'block';
+		});
 	});
 }
 
@@ -101,7 +120,11 @@ const gen4Buttons = document.getElementsByClassName('gen4');
 for (let i = 0; i < gen4Buttons.length; i++) {
 	gen4Buttons[i].addEventListener('click', function () {
 		poke_container.innerHTML = '';
+		generations.style.display = 'none';
 		fetchPokemons(387, 494);
+		setTimeout(() => {
+			generations.style.display = 'block';
+		});
 	});
 }
 
@@ -109,7 +132,11 @@ const gen5Buttons = document.getElementsByClassName('gen5');
 for (let i = 0; i < gen5Buttons.length; i++) {
 	gen5Buttons[i].addEventListener('click', function () {
 		poke_container.innerHTML = '';
+		generations.style.display = 'none';
 		fetchPokemons(495, 649);
+		setTimeout(() => {
+			generations.style.display = 'block';
+		});
 	});
 }
 
@@ -117,7 +144,11 @@ const gen6Buttons = document.getElementsByClassName('gen6');
 for (let i = 0; i < gen6Buttons.length; i++) {
 	gen6Buttons[i].addEventListener('click', function () {
 		poke_container.innerHTML = '';
+		generations.style.display = 'none';
 		fetchPokemons(650, 721);
+		setTimeout(() => {
+			generations.style.display = 'block';
+		});
 	});
 }
 
@@ -125,7 +156,11 @@ const gen7Buttons = document.getElementsByClassName('gen7');
 for (let i = 0; i < gen7Buttons.length; i++) {
 	gen7Buttons[i].addEventListener('click', function () {
 		poke_container.innerHTML = '';
+		generations.style.display = 'none';
 		fetchPokemons(722, 809);
+		setTimeout(() => {
+			generations.style.display = 'block';
+		});
 	});
 }
 
@@ -133,7 +168,11 @@ const gen8Buttons = document.getElementsByClassName('gen8');
 for (let i = 0; i < gen8Buttons.length; i++) {
 	gen8Buttons[i].addEventListener('click', function () {
 		poke_container.innerHTML = '';
+		generations.style.display = 'none';
 		fetchPokemons(810, 905);
+		setTimeout(() => {
+			generations.style.display = 'block';
+		});
 	});
 }
 
@@ -141,15 +180,18 @@ const gen9Buttons = document.getElementsByClassName('gen9');
 for (let i = 0; i < gen9Buttons.length; i++) {
 	gen9Buttons[i].addEventListener('click', function () {
 		poke_container.innerHTML = '';
+		generations.style.display = 'none';
 		fetchPokemons(906, 1017);
+		setTimeout(() => {
+			generations.style.display = 'block';
+		});
 	});
 }
 
-// Automatically fetch the first 50 Pokémon when the page loads
-window.addEventListener('load', fetchInitialPokemons);
-
-document.querySelector('.logo').addEventListener('click', () => {
-	fetchInitialPokemons();
-});
-
+const returnHome = () => {
+	logo.addEventListener('click', () => {
+		window.location.reload();
+	});
+};
+returnHome();
 fetchPokemons();
