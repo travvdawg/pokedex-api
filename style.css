@@ -54,6 +54,37 @@ nav {
 	margin-right: 3rem;
 }
 
+.hero {
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.hero button {
+	width: 300px;
+	height: 150px;
+	margin: 0rem 3rem;
+	border-radius: 15px;
+	transition: 0.2s ease-out;
+	font-size: 3rem;
+	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+	letter-spacing: 4px;
+	background-color: red;
+	color: white;
+	transition: 0.2s ease;
+	border: solid black 3px;
+	text-shadow: 2px 4px 5px black;
+}
+
+.hero button:hover {
+	transform: scale(1.4);
+	font-size: 4rem;
+	transition: 0.2s ease-in;
+	text-shadow: 2px 4px 5px black;
+}
+
 .poke-container {
 	display: flex;
 	flex-wrap: wrap;
@@ -144,6 +175,7 @@ nav {
 	border: none;
 	border-radius: 15px;
 	margin: 1.5rem;
+	display: none;
 }
 
 .generation-menu button {
@@ -176,12 +208,15 @@ nav {
 .generation-menu:hover .generation {
 	display: block;
 	border-radius: 15px;
+	cursor: pointer;
 }
 
 .generation-menu:hover button {
 	background-color: rgb(98, 182, 255);
+	cursor: pointer;
 }
 
 .generation-menu a:hover {
 	background-color: rgb(98, 182, 255);
+	cursor: pointer;
 }
