@@ -5,22 +5,25 @@ const cardsButton = document.getElementById('cards-btn');
 const generationsButton = document.getElementById('gen-all');
 const hero = document.getElementById('hero');
 const generations = document.getElementById('generation-menu');
+const id = document.getElementById('id');
+const pkmnName = document.getElementById('name');
+const sortSelect = document.getElementById('sort');
 
 const colors = {
-	fire: '#fddfdf',
-	grass: '#defde0',
-	electric: '#fcf7de',
-	water: '#def3fd',
-	ground: '#f4e7da',
+	fire: '#ff5454',
+	grass: '#2c9132',
+	electric: '#fff34f',
+	water: '#5cc5f7',
+	ground: '#9c744c',
 	rock: '#d5d5d4',
-	fairy: '#fceaff',
-	posion: '#98d7a5',
+	fairy: '#f266ca',
+	poison: '#98d7a5',
 	bug: '#f8d5a3',
 	dragon: '#97b3e6',
-	psychic: '#eaeda1',
+	psychic: '#9563d6',
 	flying: '#f5f5f5',
 	fighting: '#e6e0d4',
-	normal: '#f5f5f5',
+	normal: '#ffffff',
 	ghost: 'rgb(74,58,90)',
 };
 
@@ -80,6 +83,36 @@ const createPokemonCard = (pokemon) => {
 	poke_container.appendChild(pokemonEl);
 };
 
+sortSelect.addEventListener('change', () => {
+	const sortBy = sortSelect.value;
+	sortPokemon(sortBy);
+});
+
+const sortPokemon = (sortBy) => {
+	const pokemonCards = Array.from(poke_container.children);
+	if (sortBy === 'id') {
+		// Sort by ID
+		pokemonCards.sort((a, b) => {
+			const idA = parseInt(a.querySelector('.number').textContent.slice(1));
+			const idB = parseInt(b.querySelector('.number').textContent.slice(1));
+			return idA - idB;
+		});
+	} else if (sortBy === 'name') {
+		// Sort by Name
+		pokemonCards.sort((a, b) => {
+			const nameA = a.querySelector('.name').textContent.toLowerCase();
+			const nameB = b.querySelector('.name').textContent.toLowerCase();
+			return nameA.localeCompare(nameB);
+		});
+	}
+
+	// Remove existing cards and append sorted cards
+	poke_container.innerHTML = '';
+	pokemonCards.forEach((card) => {
+		poke_container.appendChild(card);
+	});
+};
+
 const gen1Buttons = document.getElementsByClassName('gen1');
 for (let i = 0; i < gen1Buttons.length; i++) {
 	gen1Buttons[i].addEventListener('click', function () {
@@ -88,6 +121,8 @@ for (let i = 0; i < gen1Buttons.length; i++) {
 		fetchPokemons(1, 151);
 		setTimeout(() => {
 			generations.style.display = 'block';
+			sortSelect.value = 'id';
+			sortSelect.dispatchEvent(new Event('change'));
 		});
 	});
 }
@@ -100,6 +135,8 @@ for (let i = 0; i < gen2Buttons.length; i++) {
 		fetchPokemons(152, 251);
 		setTimeout(() => {
 			generations.style.display = 'block';
+			sortSelect.value = 'id';
+			sortSelect.dispatchEvent(new Event('change'));
 		});
 	});
 }
@@ -112,6 +149,8 @@ for (let i = 0; i < gen3Buttons.length; i++) {
 		fetchPokemons(252, 386);
 		setTimeout(() => {
 			generations.style.display = 'block';
+			sortSelect.value = 'id';
+			sortSelect.dispatchEvent(new Event('change'));
 		});
 	});
 }
@@ -124,6 +163,8 @@ for (let i = 0; i < gen4Buttons.length; i++) {
 		fetchPokemons(387, 494);
 		setTimeout(() => {
 			generations.style.display = 'block';
+			sortSelect.value = 'id';
+			sortSelect.dispatchEvent(new Event('change'));
 		});
 	});
 }
@@ -136,6 +177,8 @@ for (let i = 0; i < gen5Buttons.length; i++) {
 		fetchPokemons(495, 649);
 		setTimeout(() => {
 			generations.style.display = 'block';
+			sortSelect.value = 'id';
+			sortSelect.dispatchEvent(new Event('change'));
 		});
 	});
 }
@@ -148,6 +191,8 @@ for (let i = 0; i < gen6Buttons.length; i++) {
 		fetchPokemons(650, 721);
 		setTimeout(() => {
 			generations.style.display = 'block';
+			sortSelect.value = 'id';
+			sortSelect.dispatchEvent(new Event('change'));
 		});
 	});
 }
@@ -160,6 +205,8 @@ for (let i = 0; i < gen7Buttons.length; i++) {
 		fetchPokemons(722, 809);
 		setTimeout(() => {
 			generations.style.display = 'block';
+			sortSelect.value = 'id';
+			sortSelect.dispatchEvent(new Event('change'));
 		});
 	});
 }
@@ -172,6 +219,8 @@ for (let i = 0; i < gen8Buttons.length; i++) {
 		fetchPokemons(810, 905);
 		setTimeout(() => {
 			generations.style.display = 'block';
+			sortSelect.value = 'id';
+			sortSelect.dispatchEvent(new Event('change'));
 		});
 	});
 }
@@ -184,6 +233,8 @@ for (let i = 0; i < gen9Buttons.length; i++) {
 		fetchPokemons(906, 1017);
 		setTimeout(() => {
 			generations.style.display = 'block';
+			sortSelect.value = 'id';
+			sortSelect.dispatchEvent(new Event('change'));
 		});
 	});
 }
@@ -193,5 +244,7 @@ const returnHome = () => {
 		window.location.reload();
 	});
 };
+
 returnHome();
+
 fetchPokemons();

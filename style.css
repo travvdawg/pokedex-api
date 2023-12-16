@@ -41,7 +41,7 @@ nav {
 	transform: rotate(360deg);
 	transition: 0.2s ease-in;
 	height: 120px;
-	margin-top: 1rem;
+	margin-top: 1.5rem;
 }
 
 .header h1 {
@@ -91,7 +91,7 @@ nav {
 	align-items: space-between;
 	justify-content: center;
 	margin: 0 auto;
-	max-width: 1200px;
+	max-width: 2000px;
 }
 
 .pokemon {
@@ -137,6 +137,7 @@ nav {
 
 .pokemon .info {
 	margin-top: 5px;
+	letter-spacing: 2px;
 }
 
 .pokemon .card-info {
