@@ -8,6 +8,7 @@ const generations = document.getElementById('generation-menu');
 const id = document.getElementById('id');
 const pkmnName = document.getElementById('name');
 const sortSelect = document.getElementById('sort');
+const search = document.getElementById('search');
 
 const colors = {
 	fire: '#ff5454',
@@ -41,6 +42,16 @@ const loadInitialPokemon = () => {
 loadInitialPokemon();
 
 const main_types = Object.keys(colors);
+
+let pkmnCards = [];
+
+search.addEventListener('input', (e) => {
+	const value = e.target.value;
+	pkmnCards.forEach((pokemon) => {
+		const isVisible = pokemon.name.toLowerCase().startsWith(value);
+		pokemon.element.style.display = isVisible ? 'flex' : 'none';
+	});
+});
 
 const fetchPokemons = async (start, end) => {
 	for (let i = start; i <= end; i++) {
@@ -81,6 +92,9 @@ const createPokemonCard = (pokemon) => {
 	pokemonEl.innerHTML = pokemonInnerHTML;
 
 	poke_container.appendChild(pokemonEl);
+	const cardData = { name: name, element: pokemonEl };
+	pkmnCards.push(cardData);
+	return cardData;
 };
 
 sortSelect.addEventListener('change', () => {
