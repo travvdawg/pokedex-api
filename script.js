@@ -5,6 +5,7 @@ const cardsButton = document.getElementById('cards-btn');
 const generationsButton = document.getElementById('gen-all');
 const hero = document.getElementById('hero');
 const generations = document.getElementById('generation-menu');
+const info = document.getElementById('info');
 const id = document.getElementById('id');
 const pkmnName = document.getElementById('name');
 const sortSelect = document.getElementById('sort');
@@ -66,31 +67,66 @@ const getPokemon = async (id) => {
 	createPokemonCard(data);
 };
 
+const getMoreData = async (id) => {
+	const url = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
+	const res = await fetch(url);
+	const data = await res.json();
+	displayPopup(data);
+};
+
 const createPokemonCard = (pokemon) => {
 	const pokemonEl = document.createElement('div');
 	pokemonEl.classList.add('pokemon');
-
 	const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
-
 	const poke_types = pokemon.types.map((type) => type.type.name);
 	const type = main_types.find((type) => poke_types.indexOf(type) > -1);
 	const color = colors[type];
-
 	pokemonEl.style.backgroundColor = color;
 
 	const pokemonInnerHTML = `
-    <div class="img-container">
+	<div class="poke-container" id="poke-container"  onclick="getMoreData(${pokemon.id})">
+    <div class="img-container" >
 		<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png" alt="img unavailable"/>
 	</div>
-	<div class="info">
+	<div class="info" id="info">
 		<span class="number">#${pokemon.id}</span>
 		<h3 class="name">${name}</h3>
 		<small class="type">Type: <span>${type}</span></small>
 	</div>
+	</div>
     `;
 
 	pokemonEl.innerHTML = pokemonInnerHTML;
+	poke_container.appendChild(pokemonEl);
+	const cardData = { name: name, element: pokemonEl };
+	pkmnCards.push(cardData);
+	return cardData;
+};
 
+const displayPopup = (pokemon) => {
+	console.log(pokemon);
+
+	const name = pokemon.name;
+	const description = pokemon.flavor_text_entries[8].flavor_text;
+
+	const pokemonEl = document.createElement('div');
+	pokemonEl.classList.add('pokemonFlip');
+
+	const pokemonInnerHTML = `
+	<div class="img-container" >
+		<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png" alt="img unavailable"/>
+	</div>
+	<div class="info">
+		<h3 class="name2">${name}</h3>
+		<small class="info2">${description}</small>
+	</div>
+	<div class="background-img">
+	<img src="images/background_prairie_pokemon_screencapture_by_nemotrex_de8nlib-fullview.jpg"
+	alt="background"
+	/>
+	`;
+
+	pokemonEl.innerHTML = pokemonInnerHTML;
 	poke_container.appendChild(pokemonEl);
 	const cardData = { name: name, element: pokemonEl };
 	pkmnCards.push(cardData);
