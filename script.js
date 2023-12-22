@@ -10,6 +10,7 @@ const id = document.getElementById('id');
 const pkmnName = document.getElementById('name');
 const sortSelect = document.getElementById('sort');
 const search = document.getElementById('search');
+const pokeCache = {};
 
 const colors = {
 	fire: '#ff5454',
@@ -106,11 +107,13 @@ const createPokemonCard = (pokemon) => {
 const displayPopup = (pokemon) => {
 	console.log(pokemon);
 
-	const name = pokemon.name;
-	const description = pokemon.flavor_text_entries[8].flavor_text;
-
+	const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
 	const pokemonEl = document.createElement('div');
 	pokemonEl.classList.add('pokemonFlip');
+	const flavorTextEntry = pokemon.flavor_text_entries.find(
+		(entry) => entry.language.name === 'en'
+	);
+	const flavorText = flavorTextEntry.flavor_text;
 
 	const pokemonInnerHTML = `
 	<div class="img-container" >
@@ -118,13 +121,20 @@ const displayPopup = (pokemon) => {
 	</div>
 	<div class="info">
 		<h3 class="name2">${name}</h3>
-		<small class="info2">${description}</small>
+		<small class="info2">${flavorText}</small>
 	</div>
 	<div class="background-img">
 	<img src="images/background_prairie_pokemon_screencapture_by_nemotrex_de8nlib-fullview.jpg"
 	alt="background"
 	/>
 	`;
+
+	const closePopup = () => {
+		poke_container.removeChild(pokemonEl);
+		document.removeEventListener('click', closePopup);
+	};
+
+	document.addEventListener('click', closePopup);
 
 	pokemonEl.innerHTML = pokemonInnerHTML;
 	poke_container.appendChild(pokemonEl);

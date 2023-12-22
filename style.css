@@ -181,10 +181,9 @@ nav {
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	position: absolute;
+	position: fixed;
 	padding: 3rem;
 	z-index: 1;
-	border-radius: 15px;
 	max-width: 80%;
 	cursor: pointer;
 }
@@ -196,6 +195,13 @@ nav {
 	position: absolute;
 	z-index: -1;
 	border-radius: 15px;
+	border: solid black 3px;
+	background-color: black;
+}
+
+.background-img img {
+	border-radius: 15px;
+	box-shadow: 12px 12px 20px;
 }
 
 .pokemonFlip .name2 {
