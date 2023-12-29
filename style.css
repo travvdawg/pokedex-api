@@ -273,3 +273,27 @@ nav {
 	background-color: rgb(98, 182, 255);
 	cursor: pointer;
 }
+
+.pkmn-card-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	width: 90%;
+}
+
+.pkmn-cards {
+	width: 315px;
+	margin: 1.5rem;
+	padding: 0.5rem;
+	background-color: rgb(41, 129, 0);
+	border-radius: 15px;
+	transition: 0.3s ease-in;
+}
+
+.pkmn-cards:hover {
+	cursor: pointer;
+	transition: 0.3s ease-in;
+	transform: rotateZ(1deg);
+	scale: 1.1;
+}
