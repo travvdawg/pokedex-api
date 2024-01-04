@@ -3,6 +3,7 @@ const cardSetsBtn = document.getElementById('sets');
 const deckListBtn = document.getElementById('deck-lists');
 const tournamentsBtn = document.getElementById('tournaments');
 const myDecksBtn = document.getElementById('my-decks');
+const setInfo = document.getElementById('set-info');
 
 const getPokemon = async () => {
 	const url = 'https://api.pokemontcg.io/v2/sets';
@@ -12,26 +13,32 @@ const getPokemon = async () => {
 	return data.data;
 };
 
-const handleSetItemClick = (e, sets, setInfoContainer) => {
+const handleSetItemClick = async (e, sets, setInfoContainer) => {
 	if (e.target.classList.contains('set-item')) {
 		const arrayNumber = Array.from(setInfoContainer.children).indexOf(e.target);
 		const setId = sets[arrayNumber].id;
 		console.log(`setId: ${setId}`);
 
-		const showAllCards = () => {
-			for (i = 0; i <= data.data.total; i++) {
-				console.log(showAllCards);
-			}
+		const cardsFromSets = async () => {
+			const totalCards = sets[arrayNumber].total;
+			const setId = sets[arrayNumber].id;
+			const cardSets = document.getElementById('cards-from-set');
 
-			const cardsFromSets = async () => {
-				const url = `https://api.pokemontcg.io/v2/cards/${setId}-${showAllCards}`;
+			for (let i = 1; i <= totalCards; i++) {
+				const url = `https://api.pokemontcg.io/v2/cards/${setId}-${i}`;
 				const res = await fetch(url);
 				const data = await res.json();
-				console.log(data);
-			};
 
-			cardsFromSets();
+				const pokemonCardEl = document.createElement('div');
+				pokemonCardEl.classList.add('pkmn-card');
+				const pokemonInnerHTML = `
+                    <img src="${data.data.images.large}" alt="Pokemon Card"/>
+                `;
+				pokemonCardEl.innerHTML = pokemonInnerHTML;
+				cardSets.appendChild(pokemonCardEl);
+			}
 		};
+		await cardsFromSets();
 	}
 };
 
@@ -54,6 +61,7 @@ const allPkmnSets = async () => {
 
 	setInfoContainer.addEventListener('click', (event) => {
 		handleSetItemClick(event, sets, setInfoContainer);
+		setInfoContainer.innerHTML = '';
 	});
 };
 
