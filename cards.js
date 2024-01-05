@@ -4,6 +4,8 @@ const deckListBtn = document.getElementById('deck-lists');
 const tournamentsBtn = document.getElementById('tournaments');
 const myDecksBtn = document.getElementById('my-decks');
 const setInfo = document.getElementById('set-info');
+const allSets = document.getElementById('all-sets');
+const buttonContainer = document.getElementById('button-container');
 
 const getPokemon = async () => {
 	const url = 'https://api.pokemontcg.io/v2/sets';
@@ -24,6 +26,15 @@ const handleSetItemClick = async (e, sets, setInfoContainer) => {
 			const setId = sets[arrayNumber].id;
 			const cardSets = document.getElementById('cards-from-set');
 
+			const buttonsEl = document.createElement('div');
+			buttonsEl.classList.add('button-container');
+
+			const buttonInnerHTML = `
+					<button class="all-sets" id="all-sets">All Sets</button>
+				`;
+			buttonsEl.innerHTML = buttonInnerHTML;
+			buttonContainer.appendChild(buttonsEl);
+
 			for (let i = 1; i <= totalCards; i++) {
 				const url = `https://api.pokemontcg.io/v2/cards/${setId}-${i}`;
 				const res = await fetch(url);
@@ -31,12 +42,17 @@ const handleSetItemClick = async (e, sets, setInfoContainer) => {
 
 				const pokemonCardEl = document.createElement('div');
 				pokemonCardEl.classList.add('pkmn-card');
+
 				const pokemonInnerHTML = `
                     <img src="${data.data.images.large}" alt="Pokemon Card"/>
                 `;
 				pokemonCardEl.innerHTML = pokemonInnerHTML;
 				cardSets.appendChild(pokemonCardEl);
 			}
+			const allSetsBtn = document.getElementById('all-sets');
+			allSetsBtn.addEventListener('click', () => {
+				allPkmnSets();
+			});
 		};
 		await cardsFromSets();
 	}

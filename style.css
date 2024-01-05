@@ -12,7 +12,7 @@ body {
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	/* overflow-x: hidden; */
+	overflow-x: hidden;
 }
 
 nav {
@@ -406,7 +406,31 @@ nav {
 }
 
 .cards-from-set img:hover {
-	scale: 1.8;
+	scale: 1.6;
 	transition: 0.3s ease;
 	cursor: pointer;
+}
+
+.button-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.button-container button {
+	padding: 1rem;
+	margin: 1rem;
+	width: 200px;
+	border-radius: 10px;
+	border: none;
+	font-size: 1.25rem;
+	font-weight: bolder;
+	background-color: rgb(255, 255, 255);
+	transition: 0.1s ease;
+}
+
+.button-container button:hover {
+	cursor: pointer;
+	scale: 1.1;
+	transition: 0.1s ease;
 }
